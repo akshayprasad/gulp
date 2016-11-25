@@ -17,7 +17,7 @@
 
 For a Getting started guide, angular project setup!
 
-<p>If u install nodejs already <a herf="https://nodejs.org/en/download/" target="_blank">nodeJS</a></p> 
+<p>If u already install nodejs  else Install <a href="https://nodejs.org/en/download/" target="_blank">nodeJS</a></p> 
 
 * `gulp` — npm install --global gulp-cli
 
@@ -27,6 +27,9 @@ For a Getting started guide, angular project setup!
 
 * npm install --save-dev gulp (to install gulp locale for your project)
 
+* bower init
+
+* create .bowerrc file ==> to mension where bower components should download {"directory": "app/bower_components"}
 
 ## Create your project file structure
 ```
