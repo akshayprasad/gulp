@@ -15,13 +15,17 @@
 
 ## Documentation
 
-For a Getting started guide, API docs, recipes, making a plugin, etc. check out our docs!
+For a Getting started guide, angular project setup!
 
-# Requirements
-<p align="center">
-<a href="https://nodejs.org/en/download/">NodeJS</a>
-</p>
+<p>If u install nodejs already <a herf="https://nodejs.org/en/download/" target="_blank">nodeJS</a></p> 
+
 * `gulp` — npm install --global gulp-cli
+
+* create gulpfile.js (root folder of your project)
+
+* npm init (root folder of your project)
+
+* npm install --save-dev gulp (to install gulp locale for your project)
 
 
 ## Create your project file structure
@@ -57,16 +61,16 @@ This file will give you a taste of what gulp does.
 
 ```js
 var gulp = require('gulp'),
-  htmlmin = require('gulp-htmlmin'),
-  sass = require('gulp-ruby-sass'),
-  cleanCSS = require('gulp-clean-css'),
-  imagemin = require('gulp-imagemin'),  
-	concat = require('gulp-concat'),
-	uglify = require('gulp-uglify'),
-	ngAnnotate = require('gulp-ng-annotate'),
-  jshint = require('gulp-jshint'),
-  inject = require('gulp-inject'),
-  webserver = require('gulp-webserver');
+   htmlmin = require('gulp-htmlmin'),
+   sass = require('gulp-ruby-sass'),
+   cleanCSS = require('gulp-clean-css'),
+   imagemin = require('gulp-imagemin'),  
+   concat = require('gulp-concat'),
+   uglify = require('gulp-uglify'),
+   ngAnnotate = require('gulp-ng-annotate'),
+   jshint = require('gulp-jshint'),
+   inject = require('gulp-inject'),
+   webserver = require('gulp-webserver');
 
 
 
@@ -196,7 +200,7 @@ gulp.task('serve', function() {
 - [gulp-clean-css](https://www.npmjs.com/package/gulp-clean-css) - Minify css with clean-css.
 - [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin) - Minify PNG, JPEG, GIF and SVG images.
 - [gulp-concat](https://www.npmjs.com/package/gulp-concat) - Concatenates files.
-- [gulp-uglify](hhttps://www.npmjs.com/package/gulp-uglify) - Minify files with UglifyJS.
+- [gulp-uglify](https://www.npmjs.com/package/gulp-uglify) - Minify files with UglifyJS.
 - [gulp-ng-annotate](https://www.npmjs.com/package/gulp-ng-annotate) - Add angularjs dependency injection annotations with ng-annotate
 - [gulp-jshint](https://www.npmjs.com/package/gulp-jshint) - JSHint plugin for gulp (Code Analysis Tool for JavaScript)
 - [gulp-inject](https://www.npmjs.com/package/gulp-inject) - A javascript, stylesheet and webcomponent injection plugin for Gulp, i.e. inject file references into your index.html
@@ -220,3 +224,6 @@ We recommend these plugins:
 
 3) https://github.com/gulpjs/gulp/blob/master/docs/README.md#articles
 
+## License
+
+MIT
