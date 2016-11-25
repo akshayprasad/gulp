@@ -84,6 +84,46 @@ gulp.task('watch',function(){
 gulp.task('default',['scripts','styles','watch']);
 gulp.task('build',['scripts','styles','watch','zip']);
 ```
+## File Structure
+```
+.
+├── app
+|   ├── css
+│   ├── images
+│   ├── js
+│   └── modules
+│   │    ├── login
+│   │    │   └── login.html
+│   │    │   └── loginCtrl.js
+│   │    └──  signup
+│   │        └── signup.html
+│   │        └── signupCtrl.js
+|   │  
+|   ├── app.js 
+|   ├── config.js
+|   └── index.html
+|
+├── dist
+├── .bowerrc
+├── .jshintrc
+├── bower.json
+├── gulpfile.js
+└── package.json
+```
+
+## Required plugins
+- [gulp](https://www.npmjs.com/package/gulp) - The streaming build system.
+- [gulp-htmlmin](https://www.npmjs.com/package/gulp-htmlmin) - gulp plugin to minify HTML.
+- [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) - Compile Sass to CSS with Ruby Sass.
+- [gulp-clean-css](https://www.npmjs.com/package/gulp-clean-css) - Minify css with clean-css.
+- [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin) - Minify PNG, JPEG, GIF and SVG images.
+- [gulp-concat](https://www.npmjs.com/package/gulp-concat) - Concatenates files.
+- [gulp-uglify](hhttps://www.npmjs.com/package/gulp-uglify) - Minify files with UglifyJS.
+- [gulp-ng-annotate](https://www.npmjs.com/package/gulp-ng-annotate) - Add angularjs dependency injection annotations with ng-annotate
+- [gulp-jshint](https://www.npmjs.com/package/gulp-jshint) - JSHint plugin for gulp (Code Analysis Tool for JavaScript)
+- [gulp-inject](https://www.npmjs.com/package/gulp-inject) - A javascript, stylesheet and webcomponent injection plugin for Gulp, i.e. inject file references into your index.html
+- [gulp-webserver](https://www.npmjs.com/package/gulp-webserver) - Gulp plugin to run a local webserver with LiveReload
+
 
 ## Incremental Builds
 
@@ -94,41 +134,9 @@ We recommend these plugins:
 - [gulp-remember](https://github.com/ahaurw01/gulp-remember) - pairs nicely with gulp-cached
 - [gulp-newer](https://github.com/tschaub/gulp-newer) - pass through newer source files only, supports many:1 source:dest
 
-## Want to contribute?
 
-Anyone can help make this project better - check out our [Contributing guide](/CONTRIBUTING.md)!
+# Reference Links
+1) https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
 
-## Backers
+2) https://github.com/gulpjs/gulp/tree/master/docs/recipes
 
-Support us with a monthly donation and help us continue our activities.
-
-[![Backers][backers-image]][support-url]
-
-## Sponsors
-
-Become a sponsor to get your logo on our README on Github.
-
-[![Sponsors][sponsors-image]][support-url]
-
-[downloads-image]: https://img.shields.io/npm/dm/gulp.svg
-[npm-url]: https://www.npmjs.com/package/gulp
-[npm-image]: https://img.shields.io/npm/v/gulp.svg
-
-[travis-url]: https://travis-ci.org/gulpjs/gulp
-[travis-image]: https://img.shields.io/travis/gulpjs/gulp/master.svg
-
-[coveralls-url]: https://coveralls.io/r/gulpjs/gulp
-[coveralls-image]: https://img.shields.io/coveralls/gulpjs/gulp/master.svg
-
-[gitter-url]: https://gitter.im/gulpjs/gulp
-[gitter-image]: https://badges.gitter.im/gulpjs/gulp.svg
-
-[backer-url]: #backers
-[backer-badge]: https://opencollective.com/gulpjs/backers/badge.svg?color=blue
-[sponsor-url]: #sponsors
-[sponsor-badge]: https://opencollective.com/gulpjs/sponsors/badge.svg?color=blue
-
-[support-url]: https://opencollective.com/gulpjs#support
-
-[backers-image]: https://opencollective.com/gulpjs/backers.svg
-[sponsors-image]: https://opencollective.com/gulpjs/sponsors.svg
