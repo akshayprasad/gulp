@@ -5,8 +5,6 @@
   <p align="center">The streaming build system</p>
 </p>
 
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![OpenCollective Backers][backer-badge]][backer-url] [![OpenCollective Sponsors][sponsor-badge]][sponsor-url] [![Gitter chat][gitter-image]][gitter-url]
-
 
 ## What is gulp?
 
@@ -27,54 +25,64 @@ For a Getting started guide, API docs, recipes, making a plugin, etc. check out 
 This file will give you a taste of what gulp does.
 
 ```js
-var gulp = require('gulp');
-var coffee = require('gulp-coffee');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var imagemin = require('gulp-imagemin');
-var sourcemaps = require('gulp-sourcemaps');
-var del = require('del');
-
-var paths = {
-  scripts: ['client/js/**/*.coffee', '!client/external/**/*.coffee'],
-  images: 'client/img/**/*'
-};
-
-// Not all tasks need to use streams
-// A gulpfile is just another node program and you can use any package available on npm
-gulp.task('clean', function() {
-  // You can use multiple globbing patterns as you would with `gulp.src`
-  return del(['build']);
+var gulp = require('gulp'),
+    uglify = require('gulp-uglify'),
+    sass = require('gulp-ruby-sass'),
+    livereload = require('gulp-livereload'),
+    zip = require('gulp-zip'),
+    imagemin = require('gulp-imagemin'),
+    autoprefixer = require('gulp-autoprefixer');
+//Scripts Uglifies task
+function errorLog(error){
+console.error.bind(error);
+this.emit('end');
+}
+gulp.task('scripts',function(){
+  gulp.src('app/**/*.js')
+  .pipe(uglify())
+   .on('error',errorLog)
+  .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('scripts', ['clean'], function() {
-  // Minify and copy all JavaScript (except vendor scripts)
-  // with sourcemaps all the way down
-  return gulp.src(paths.scripts)
-    .pipe(sourcemaps.init())
-      .pipe(coffee())
-      .pipe(uglify())
-      .pipe(concat('all.min.js'))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('build/js'));
+//Styles Uglifies task
+
+gulp.task('styles',function(){
+ sass('app/**/*.scss')
+ .on('error',errorLog)
+ .pipe(autoprefixer(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        })))
+ .pipe(gulp.dest('app/'))
+ .pipe(gulp.dest('dist/'))
+ .pipe(livereload());
 });
 
-// Copy all static images
-gulp.task('images', ['clean'], function() {
-  return gulp.src(paths.images)
-    // Pass in options to the task
-    .pipe(imagemin({optimizationLevel: 5}))
-    .pipe(gulp.dest('build/img'));
+
+//create zip file task
+gulp.task('zip', function(){
+    return gulp.src('dist/**/')
+        .pipe(zip('archive.zip'))
+         .on('error',errorLog)
+        .pipe(gulp.dest('zip/'));
+});
+//image compress task
+gulp.task('imagemin',function(){
+    gulp.src('app/images/*')
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/images'));
 });
 
-// Rerun the task when a file changes
-gulp.task('watch', function() {
-  gulp.watch(paths.scripts, ['scripts']);
-  gulp.watch(paths.images, ['images']);
+//watch task Watches JS
+gulp.task('watch',function(){
+    livereload.listen();
+    gulp.watch('app/**/*.js',['scripts']);
+    gulp.watch('app/**/*.scss',['styles']);
 });
 
-// The default task (called when you run `gulp` from cli)
-gulp.task('default', ['watch', 'scripts', 'images']);
+
+gulp.task('default',['scripts','styles','watch']);
+gulp.task('build',['scripts','styles','watch','zip']);
 ```
 
 ## Incremental Builds
