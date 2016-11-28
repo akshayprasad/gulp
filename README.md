@@ -15,11 +15,11 @@
 
 - **Gulp** is a tool that helps you out with several tasks when it comes to web development. It's often used to do front end tasks like:
 
-- Reloading the browser automatically whenever a file is saved
-- Using preprocessors like Sass or LESS
-- Optimizing assets like CSS, JavaScript, and images for production
+    - Reloading the browser automatically whenever a file is saved
+    - Using preprocessors like Sass or LESS
+    - Optimizing assets like CSS, JavaScript, and images for production
 
- **if you're interested in finding out more**
+ **if you're interested in finding other Task runners**
  - [Brunch](http://brunch.io/) - solving real problems instead of messing around with the glue.
  - [gruntjs](http://gruntjs.com/) - The JavaScript Task Runner.
  - [broccoli](https://github.com/broccolijs/broccoli) - Browser compilation library – an asset pipeline for applications that run in the browser
@@ -125,17 +125,16 @@ This file will give you a taste of what gulp does.
 
 ```js
 var gulp = require('gulp'),
-   htmlmin = require('gulp-htmlmin'),
-   sass = require('gulp-ruby-sass'),
-   cleanCSS = require('gulp-clean-css'),
-   imagemin = require('gulp-imagemin'),  
-   concat = require('gulp-concat'),
-   uglify = require('gulp-uglify'),
-   ngAnnotate = require('gulp-ng-annotate'),
-   jshint = require('gulp-jshint'),
-   inject = require('gulp-inject'),
-   webserver = require('gulp-webserver');
-
+  htmlmin = require('gulp-htmlmin'),
+  sass = require('gulp-ruby-sass'),
+  cleanCSS = require('gulp-clean-css'),
+  imagemin = require('gulp-imagemin'),  
+  concat = require('gulp-concat'),
+  uglify = require('gulp-uglify'),
+  ngAnnotate = require('gulp-ng-annotate'),
+  jshint = require('gulp-jshint'),
+  inject = require('gulp-inject'),
+  webserver = require('gulp-webserver');
 
 
 gulp.task('lint', function() {
@@ -199,7 +198,6 @@ gulp.task('appJS', function(){
 	gulp.src([
 		'app/**/*.js',
 	])
-			.pipe(license('MIT', {tiny: true}))
 	.pipe(ngAnnotate())
 	.pipe(concat('app.min.js'))
 	.pipe(uglify())
@@ -227,7 +225,7 @@ gulp.task('copy', function () {
 });
 
 gulp.task('watch',function(){
-    gulp.watch('app/**/*.js',['appJS']);
+    gulp.watch('app/**/*.js',['appJS','lint']);
     gulp.watch('styles/*.scss',['appCSS']);
 });
 
