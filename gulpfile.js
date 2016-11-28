@@ -99,7 +99,7 @@ gulp.task('copy', function () {
 });
 
 gulp.task('watch',function(){
-    gulp.watch('app/**/*.js',['appJS']);
+    gulp.watch('app/**/*.js',['appJS','lint']);
     gulp.watch('styles/*.scss',['appCSS']);
 });
 
