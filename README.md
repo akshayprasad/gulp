@@ -13,7 +13,7 @@ $ bower install
 $ gulp   // dovelopment
 $ gulp build //production
 ```
-you can see demo here.. <a href="https://vishwackh.github.io/gulp/dist/" target="_blank">demo</a>
+### You can check demo here.. <a href="https://vishwackh.github.io/gulp/dist/" target="_blank">demo</a>
 
 ## What is gulp?
 
