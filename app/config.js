@@ -1,6 +1,6 @@
 'use strict';
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($locationProvider,$stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/login');
 
@@ -16,7 +16,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'modules/signup/signup.html',
             controller:'loginCtrl'
         });
-
+$locationProvider.html5Mode(true);
 })
 .run(function ($rootScope,   $state,   $stateParams) {
         $rootScope.$state = $state;
