@@ -1,6 +1,6 @@
 'use strict';
 
-app.config(function($locationProvider,$stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/login');
 
