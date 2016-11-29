@@ -4,7 +4,15 @@
   </a>
   <p align="center">The streaming build system</p>
 </p>
+## Quick Start?
+```js
+$ git clone https://github.com/vishwackh/gulp.git
+$ npm install
+$ bower install
 
+$ gulp   // dovelopment
+$ gulp build //production
+```
 
 ## What is gulp?
 
