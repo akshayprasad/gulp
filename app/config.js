@@ -16,7 +16,6 @@ app.config(function($locationProvider,$stateProvider, $urlRouterProvider) {
             templateUrl: 'modules/signup/signup.html',
             controller:'loginCtrl'
         });
-$locationProvider.html5Mode(true);
 })
 .run(function ($rootScope,   $state,   $stateParams) {
         $rootScope.$state = $state;
