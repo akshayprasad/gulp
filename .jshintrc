@@ -53,10 +53,9 @@
 
     "browser": true,
     "node": true,
-
-    "globals": {
-        "angular": false,
-        "$": false,
-        "app":false
-    }
+  "globals": {
+      "angular": false,
+      "$": false,
+      "app":false
+  }
 }

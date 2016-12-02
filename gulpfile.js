@@ -8,8 +8,20 @@ var gulp = require('gulp'),
 	ngAnnotate = require('gulp-ng-annotate'),
   jshint = require('gulp-jshint'),
   inject = require('gulp-inject'),
-  webserver = require('gulp-webserver');
+  webserver = require('gulp-webserver'),
+  banner = require('gulp-banner'),
+  Server = require('karma').Server,
+  gutil = require('gulp-util'),
+  pkg = require('./package.json');
 
+var comment = '/*\n' +
+    ' * <%= pkg.name %> <%= pkg.version %>\n' +
+    ' * <%= pkg.description %>\n' +
+    ' * <%= pkg.homepage %>\n' +    
+    ' *\n' +
+    ' * Copyright 2016, <%= pkg.author %>\n' +
+    ' * Released under the <%= pkg.license %> license.\n' +
+    '*/\n\n'; 
 
 gulp.task('lint', function() {
   return gulp.src(['./app/**/*.js','!./app/js/vendor.min.js','!./dist/vendor.min.js'])
@@ -38,7 +50,7 @@ gulp.task('bowercss', function() {
     gulp.src([
 		'bower_components/bootstrap/dist/css/bootstrap.css'
   	])
-  	.pipe(concat('vendor.min.css'))
+  	.pipe(concat('vendor.min.css'))   
     .pipe(cleanCSS())
     .pipe(gulp.dest('app/css'))
     .pipe(gulp.dest('dist'));
@@ -52,7 +64,7 @@ gulp.task('bowerJS', function() {
     'bower_components/angular-ui-router/release/angular-ui-router.js'
   ])
     .pipe(concat('vendor.min.js'))
-    .pipe(uglify())
+    .pipe(uglify())   
     .pipe(gulp.dest('app/js'))
     .pipe(gulp.dest('dist'));
 });
@@ -61,8 +73,8 @@ gulp.task('appCSS',function(){
  sass('styles/*.scss')
  .on('error', sass.logError)
  .pipe(concat('app.min.css'))
- .pipe(cleanCSS())
- .pipe(gulp.dest('app/css'))
+ .pipe(gutil.env.type === 'prod' ? cleanCSS() : gutil.noop())
+ .pipe(gulp.dest('app/css'))  
  .pipe(gulp.dest('dist'));
 });
 
@@ -74,7 +86,8 @@ gulp.task('appJS', function(){
 	])
 	.pipe(ngAnnotate())
 	.pipe(concat('app.min.js'))
-	.pipe(uglify())
+  .pipe(gutil.env.type === 'prod' ? uglify() : gutil.noop())
+  .pipe(gutil.env.type === 'prod' ? banner(comment, {pkg: pkg}) : gutil.noop())  
 	.pipe(gulp.dest('dist'));
 });
 
@@ -92,7 +105,7 @@ gulp.task('imagemin',function(){
         .pipe(gulp.dest('dist/images'));
 });
 
-gulp.task('copy', function () {
+gulp.task('copy', function (){
     gulp.src('bower_components/bootstrap/dist/fonts/*')
        .pipe(gulp.dest('app/fonts'))
         .pipe(gulp.dest('dist/fonts'));
@@ -127,3 +140,41 @@ gulp.task('serve', function() {
       port:8000
     }));
 });
+
+// gulp --type=prod
+
+/**
+ * Run test once and exit
+ */
+gulp.task('gtest', function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
+
+/**
+ * Watch for file changes and re-run tests on each change
+ */
+gulp.task('gtest:watch', function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js'
+  }, done).start();
+});
+
+function runKarma(done, singleRun) {
+    new Server({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: singleRun || false
+    }, done).start();
+}
+/**
+ * Run test once and exit
+ */
+gulp.task('test', function (done) {
+    runKarma(done, true);
+});
+/**
+ * Watch for file changes and re-run tests on each change
+ */
+gulp.task('dev-test', runKarma);
