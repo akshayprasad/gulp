@@ -284,6 +284,8 @@ We recommend these plugins:
 
 3) https://github.com/gulpjs/gulp/blob/master/docs/README.md#articles
 
+4) https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/guidelines.md
+
 ## License
 
 MIT
